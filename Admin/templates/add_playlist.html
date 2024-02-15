@@ -1,0 +1,144 @@
+{% extends 'base.html' %} {% load static %}
+<html lang="en">
+  <head>
+    <title>Play List</title>
+  </head>
+  <body>
+    {% block body %} {% if msg %}
+    <div class="alert alert-danger"><strong>!!</strong> {{ msg }}</div>
+    {% endif %}
+
+    <div class="slider_area">
+      <div class="single_slider d-flex align-items-center slider_bg_1 overlay2">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="slider_text text-center">
+                <h2 style="color: white">Play List</h2>
+              </div>
+            </div>
+          </div>
+          <section class="vh-50 gradient-custom">
+            <div class="container py-5 h-50">
+              <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                  <div
+                    class="card shadow-2-strong card-login"
+                    style="
+                      border-radius: 15px;
+                      background-color: rgba(255, 255, 255, 0.8);
+                    "
+                  >
+                    <div class="card-body p-4 p-md-5 bg5">
+                      <form method="post" action="">
+                        
+                        {% if msg %}
+                        <div class="alert alert-danger">
+                          <strong>!!</strong> {{ msg }}
+                        </div>
+                        {% endif %}
+                        {% csrf_token %} 
+                        
+                        {% comment %} <div class="row"> {% endcomment %}
+                          <div class="col-md-12 ">
+                            <h3 class="col-md-12"> Add To Playlist </h3>
+                            <strong><h5 class="col-md-12">Existing PlayList </h5></strong>
+                          </div>
+                          {% comment %} <h1 style="color:white;">{{ Play_list }}</h1> {% endcomment %}
+                          {% for i in Play_list %}
+                          <div class="col-md-12">
+                      
+                            <div class="col-md-12">
+                              <div class="custom-border d-flex justify-content-between align-items-center" style="border-bottom: 1px solid black; text-decoration: none; padding-bottom: 2px;">
+                                <div>
+                                  <img src="http://a10.gaanacdn.com/gn_img/song/lJvKa56KDV/vKa91Z1RKD/size_m_1628085090.jpg" width="50px" height="50px" alt="Image description">
+                                  <strong class="t_over">{{i}}</strong>
+                                </div>
+                                <div>
+                                  
+                                  <a href="{% url 'add_to_existing_playlist' id=i.id slug=song_updation.slug %}">
+                                    <input type="radio" id="html" name="fav_language" value="{{i}}" >
+                                    <label for="html">Select Playlist</label>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            
+                              <style>
+                                .custom-border a {
+                                  position: relative;
+                                  top: 2px; /* Adjust as needed */
+                                }
+                              </style>
+                            {% comment %} </ul> {% endcomment %}
+                          </div>
+                          {% endfor %}
+                          <div class="col-md-12" style="padding-top:25px;">
+                            <div class="form-outline col-md-12" >
+                              <input
+                                type="text"
+                                id="playlist"
+                                class="form-control form-control-lg"
+                                name="playlist"
+                                placeholder="PlaylistName"
+                              />
+                            </div>
+                          </div>
+                          
+                          <div class="col-md-12">
+                            <div class="mt-4 pt-1 " style = "padding-left:10px;">
+                              <input
+                                class="btn btn-primary btn-lg"
+                                type="submit"
+                                value="Create Play List"
+                              />
+                            </div>
+                          </div>
+
+                        
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <style>
+                          .btn-primary {
+                            background: linear-gradient(
+                              to right,
+                              #3366ff,
+                              #00ccff
+                            ); /* Gradient background */
+                            border: 2px solid #00b3ff; /* Blue border */
+                            border-radius: 25px; /* Rounded corners */
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Soft shadow */
+                            font-family: "Roboto", sans-serif; /* Modern font */
+                            font-size: 16px; /* Adjust font size as needed */
+                            color: #fff; /* White text */
+                            padding: 12px 20px; /* Adjust padding for spacing */
+                            cursor: pointer; /* Hand cursor on hover */
+                            transition: all 0.3s ease-in-out; /* Smooth transitions */
+                          }
+
+                          .btn-primary:hover {
+                            background-color: #00b3ff; /* Lighter gradient on hover */
+                            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+                          }
+                          label {
+                            padding-top: 5px;
+                            color: #000000;
+                          }
+                          h5 {
+                            padding-top: 5px;
+                            border: 5px;
+                          }
+
+                          
+                        </style>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<head>
+    <title>forgot_password</title>
+</head>
+
+<body>
+{% block body %}
+<script>
+    function otpcheck(){
+        event.preventDefault(); // Prevent form submission
+        var otp_value = document.getElementById('otp').value; 
+        console.log(otp_value);
+        if(otp_value != ""){
+          console.log(otp_value);
+        }
+        else{
+          alert("Enter OTP!");
+        }
+    };
+</script>
+<div class="slider_area">
+    <div class="single_slider  d-flex align-items-center slider_bg_1 overlay2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="slider_text text-center">
+                        <h2 style="color:white;"> OTP Varification </h2>
+                    </div>
+                </div>
+            </div>
+            <section class="vh-50 gradient-custom">
+                <div class="container py-5 h-50">
+                  <div class="row justify-content-center align-items-center h-100">
+                    {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}" style="color:white;"{% endif %}>{{ message }}</li>
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                {% endfor %}
+                            </ul>
+                          {% endif %}
+                    <div class="col-12 col-lg-9 col-xl-7">
+                      <div class="card shadow-2-strong card-login" style="border-radius: 15px; background-color: rgba(255, 255, 255, 0.8);">
+                        <div class="card-body p-4 p-md-5 bg5">
+                          <form method="post" action="{% url 'otp_verification' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                              <div class="col-md-6 mb-4">
+                                <div class="form-outline"> 
+                                  <input type="text" id="otp" class="form-control form-control-lg" name="otp" placeholder="Enter OTP" onfocusout="otpcheck()" />
+                                </br>
+                                  <input class="btn btn-primary btn-lg" type="submit" value=" Verify OTP" />
+                                  </div>      
+                                </div>
+                              </div>
+                            </div>
+                            <script>
+                            </script>                            
+                            <style>
+                              .btn-primary {
+                                background: linear-gradient(to right, #3366ff, #00ccff); /* Gradient background */
+                                border: 2px solid #00b3ff; /* Blue border */
+                                border-radius: 25px; /* Rounded corners */
+                                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Soft shadow */
+                                font-family: 'Roboto', sans-serif; /* Modern font */
+                                font-size: 16px; /* Adjust font size as needed */
+                                color: #fff; /* White text */
+                                padding: 12px 20px; /* Adjust padding for spacing */
+                                cursor: pointer; /* Hand cursor on hover */
+                                transition: all 0.3s ease-in-out; /* Smooth transitions */
+                              }
+                              
+                              .btn-primary:hover {
+                                background-color: #00b3ff; /* Lighter gradient on hover */
+                                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+                              }  
+                                            
+                              h5 {
+                                padding-top:5px;
+                                border:5px;
+                              }
+                            </style>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            
+        </div>
+    </div>
+</div>
+
+
+  {% endblock %}
+  <body>

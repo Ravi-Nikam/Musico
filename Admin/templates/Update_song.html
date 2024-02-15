@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% load static %}
+<html class="no-js" lang="zxx">
+   <head>
+      
+  </head>
+   <body>
+      {% block body %}
+      <!-- slider_area_start -->
+      <div class="slider_area">        
+         <div class="single_slider d-flex align-items-center slider_bg_1 overlay2">
+            <div class="container">
+               <div class="row" style="padding-top: 55px">
+               </div>
+               <section cl-ass="vh-100 gradient-custom">
+                  <div class="container py-5 h-100">
+                     <div class="row justify-content-center align-items-center h-100">
+                        <div class="col-12 col-lg-9 col-xl-7">
+                           <div
+                              class="card shadow-2-strong card-registration"
+                              style="border-radius: 15px"
+                              >
+                              <div class="card-body p-4 p-md-5">
+                                {% comment %} {% for i in song_information %} {% endcomment %}
+                                 <form method="post" action="" enctype="multipart/form-data">
+                                    {% if msg %}
+                                        <div class="alert alert-danger">
+                                                <strong>!!</strong> {{ msg }}
+                                        </div>
+                                    {% endif %}
+                                    {% csrf_token %}
+                                    <div class="row">
+                                       <div class="col-md-10 mb-4">
+                                          <div class="form-outline">
+                                            <label class="form-label" for="firstName"
+                                                >Song_Artist</label
+                                                > 
+                                            <input
+                                                type="text"
+                                                id="Song_Artist"
+                                                class="form-control form-control-lg"
+                                                name="Song_Artist"
+                                                value={{song_information.Song_Artist}}
+                                                />
+                                             
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-10 mb-2">
+                                         <div class="form-outline">
+                                           <label class="form-label" for="firstName"
+                                               >Song_Name</label
+                                               >
+                                            <input
+                                               type="text"
+                                               id="Song_Name"
+                                               class="form-control form-control-lg"
+                                               name="Song_Name"
+                                               value = {{song_information.Song_Name}}
+                                               />
+                                         </div>
+                                      </div>
+                                   </div>
+                                    <div class="row">
+                                        <audio controls id="audioPlayer" src="{{song_information.Song_Audio_File.url}}" style=" height: 50px;padding-left:15px;" type="audio/mp3"></audio>
+                                       <div class="col-md-10 mb-4">
+                                          <div class="form-outline">
+                                            <label class="form-label" for="Song_Audio_File"
+                                                >Song_Audio_File</label
+                                                > 
+                                                
+                                            <input
+                                                type="file"
+                                                id="Song_Audio_File"
+                                                class="form-control form-control-lg"
+                                                name="Song_Audio_File"
+                                                accept="audio/*"
+                                                />
+                                             
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <img src="{{song_information.Song_Image.url}}" class="card-img" alt="..." style="height:120px; width:100px; padding-left:15px;">
+                                    <div class="row">
+                                       <div class="col-md-10 mb-4">
+                                          <div class="form-outline">
+                                            <label class="form-label" for="Song_Image"
+                                                >Song_Image</label
+                                                > 
+                                            <input
+                                                type="file"
+                                                id="Song_Image"
+                                                class="form-control form-control-lg"
+                                                name="Song_Image"
+                                                />
+                                             
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-10 mb-4">
+                                        
+                                          <select
+                                             class="select form-control-lg"
+                                             name="Song_Type">
+                                             {% comment %} {{au}} {% endcomment %}
+                                            {% for j in list_category %}
+                                                <option value="{{j.Name_category}}">{{j.Name_category}}</option>
+                                            {% endfor %}
+                                          </select>
+                                        
+                                          <label class="form-label select-label">Type of Song </label>    
+                                       </div>
+                                    </div>
+                                    <div class="mt-4 pt-2">
+                                       <input
+                                          class="btn btn-primary btn-lg"
+                                          type="submit"
+                                          value="Update Music"
+                                          />
+                                    </div>
+                                 </form>
+                                 {% comment %} {% endfor %} {% endcomment %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </div>
+         </div>
+      </div>
+      {% endblock %}
+   </body>
+</html>

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Music List</title>
+      <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+   </head>
+   <body>
+      {% block body %}
+      {% if msg %}
+      <div class="alert alert-danger">
+         <strong>!!</strong> {{ msg }}
+      </div>
+      {% endif %}
+      <div class="slider_area">
+      <div class="single_slider d-flex align-items-center slider_bg_1 overlay2">
+         <div class="container">
+            <div class="row">
+               <div class="alert  alert-dismissible"  role="alert">
+                  {% if messages %}
+                  <ul class="messages">
+                     {% for message in messages %}
+                     <li{% if message.tags %} class="{{ message.tags }}" style="color:white;"{% endif %}>{{ message }}</li>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                     {% endfor %}
+                  </ul>
+                  {% endif %}
+               </div>
+               <div class="col-xl-12">
+                  <h3>Music List </h3>
+                  {% comment %} overflow-y: auto; {% endcomment %}
+                  <div class="col-xl-12" style=" overflow-y:; max-height: 700px; scrollbar-color: red orange;   scrollbar-width: none;">
+             
+                        {% for i in all_song.Songs.all %} {% comment %}  its give song table access {% endcomment %}
+                        <div class="card text-bg-dark" style="background-color: transparent; border: 1px solid #ccc; border-radius: 8px; padding: 10px;">
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <img src="{{i.Song_Image.url}}" class="card-img" alt="..." style="height:120px; width:100px;">
+                                 <div class="card-img-overlay" style="padding-left:120px;">
+                                    <audio controls id="audioPlayer" src="{{i.Song_Audio_File.url}}" style="width: 700px; height: 50px; padding-bottom:10px;" type="audio/mp3"></audio>
+                                    <h5 class="card-title" style="color:white; padding-left:10px;">{{i.Song_Artist}}-{{i.Song_Name}}</h5>
+                                 </div>
+                              </div>
+                              <div class="col-md-6 text-right"></div>
+                           </div>
+                           {{all_song.Email.User_Type}}
+                           {% if all_song.Email.User_Type == "1" %}
+                           <div class="text-right">
+                              <div class="dropdown" style="color:white;font:24px;">
+                                 <i class="fas fa-ellipsis-v fa-lg text-dark" style="padding-left:90px; padding-bottom:15px;"></i>
+                                 <div class="dropdown-content" style="color:red;">
+                     <a href="{% url 'view_song_details' slug=i.slug %}"><i class="fa-solid fa-plus" style="color: white;"></i></a>
+                     <a href="{% url 'remove_from_playlist' id=all_song.id slug=i.slug %}"><i class="fa-solid fa-gears" style="color: white;"></i></a>
+                     <a href="#"><i class="fa-solid fa-share" style="color: white;"></i></a>
+                     </div>
+                     </div>
+                     </div>                          
+                     {% endif %}
+                     </div>                     
+                     </br>
+                     {% endfor %}
+                  </div>
+                  {% comment %} scroll bar {% endcomment %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <style>
+         
+         .dropdown {
+         position: relative;
+         display: inline-block;
+         }
+         .dropdown-content {
+         display: none;
+         position: absolute;
+         background-color: #000;
+         min-width: 100px;
+         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+         z-index: 1;
+         }
+         .dropdown-content a {
+         color: white;
+         padding: 12px 16px;
+         text-decoration: none;
+         display: block;
+         }
+         .dropdown-content a:hover {background-color: #ddd;}
+         .dropdown:hover .dropdown-content {display: block;}
+         .dropdown:hover .dropbtn {background-color: #3e8e41;}
+      </style>
+      {% endblock %}
+   </body>
+</html>

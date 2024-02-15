@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% load static %}
+<html lang="en">
+  <head>
+    <title>Play List</title>
+  </head>
+  <body>
+    {% block body %} {% if msg %}
+    <div class="alert alert-danger"><strong>!!</strong> {{ msg }}</div>
+    {% endif %}
+
+    <div class="slider_area">
+      <div class="single_slider d-flex align-items-center slider_bg_1 overlay2">
+        <div class="container">
+          <div class="row">
+            {% if messages %}
+              <ul class="messages">
+                  {% for message in messages %}
+                      <li{% if message.tags %} class="{{ message.tags }}" style="color:white;"{% endif %}>{{ message }}</li>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+            <div class="col-xl-12">
+              <div class="slider_text text-center">
+                {% comment %} <h2 style="color: white">Play List</h2> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          <section class="vh-50 gradient-custom">
+            <div class="container py-5 h-50">
+              <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                  <div
+                    class="card shadow-2-strong card-login"
+                    style="
+                      border-radius: 15px;
+                      background-color: rgba(255, 255, 255, 0.8);
+                    "
+                  >
+                    <div class="card-body p-4 p-md-5 bg5">
+                      <form method="post" action="">
+                        
+                        {% if msg %}
+                        <div class="alert alert-danger">
+                          <strong>!!</strong> {{ msg }}
+                        </div>
+                        {% endif %}
+                        {% csrf_token %} 
+                        
+                
+                          <div class="col-md-12 ">
+                            <h3 class="col-md-12" style="padding:10px;"> My playlist </h3>
+                
+                          </div>
+                
+                          {% for i in list_of_playlist %}
+                          <div class="col-md-12">
+                      
+                            <div class="col-md-12">
+                              <div class="custom-border d-flex justify-content-between align-items-center" style="border-bottom: 1px solid black; text-decoration: none; padding-bottom: 2px;">
+                                <div>
+                                  <img src="http://a10.gaanacdn.com/gn_img/song/lJvKa56KDV/vKa91Z1RKD/size_m_1628085090.jpg" width="50px" height="50px" alt="Image description">
+                                  <strong class="t_over">{{i}}</strong>
+                                </div>
+                                <div>
+                                  {% comment %} it will delete the playlist {% endcomment %}
+                                  <a href="{% url 'remove_playlist' id=i.id %}">
+                                    <i class="fa-solid fa-trash" style="padding-right:10px;color: #e43b17 ;"></i>
+                                  </a>
+                                  {% comment %} it will navigate to the playlist song page {% endcomment %}
+                                  <a href="{% url 'playlist_song' id=i.id %}">
+                                    <i class="fa-solid fa-right-to-bracket" style="color:  #0e25dd ;"></i>
+                                  </a>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            
+                              <style>
+                                .custom-border a {
+                                  position: relative;
+                                  top: 2px; /* Adjust as needed */
+                                }
+                              </style>
+                            
+                          </div>
+                          {% endfor %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

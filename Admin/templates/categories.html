@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+<html class="no-js" lang="zxx">
+
+<head>
+    <style>
+		
+	</style>
+</head>
+
+<body>
+  
+{% block body %}
+<!-- slider_area_start -->
+<div class="slider_area">
+  <div class="single_slider  d-flex align-items-center slider_bg_1 overlay2">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="slider_text text-center">
+                      {% comment %} <h2 style="color:white;">Login </h2> {% endcomment %}
+                  </div>
+              </div>
+          </div>
+          <section class="vh-50 gradient-custom">
+            <div class="container py-5 h-50">
+              <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                  <div class="card shadow-2-strong card-login" style="border-radius: 15px; background-color: rgba(255, 255, 255, 0.8);"> <div class="card-body p-4 p-md-5 bg5">
+                      <form method="post" action="">
+                        {% if msg %}
+                          <div class="alert alert-danger">
+                            <strong>!!</strong> {{ msg }}
+                          </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}" style="color:white;"{% endif %}>{{ message }}</li>
+                                </button>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-outline mb-4"> <input type="text" id="Category_Music" class="form-control form-control-lg" name="CategoryMusic" onfocusout="cat_name()" placeholder="Name Category"  required/>
+                              <span id="catname"/>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-outline mb-4"> <input type="text" id="Category_Description" class="form-control form-control-lg" name="CategoryDescription" onfocusout="Cat_Description()" placeholder="Description Category" />                            
+                              <span id="cat"/>
+                            </div>
+                          </div>
+                        </div>
+                        <script>
+                          function Cat_Description(){
+                            var x = document.getElementById("Category_Description").value;
+                            if (x.length === 0){
+                              document.getElementById('cat').innerText = "Enter Category Description";
+                              return false;
+                            }
+                          }
+                          function cat_name(){
+                            var x = document.getElementById("Category_Music").value;
+                            if (x.length === 0){
+                              document.getElementById('catname').innerText = "Enter Category Name"
+                              return false;
+                            }
+                          }
+                        </script>
+                        <div class="row">
+                          
+                        <div class="col-md-6"> <input class="btn btn-primary btn-lg" type="submit" value="Add Genre & Moods" />
+                          {% comment %} <a href="{% url 'add_audio' %}"><input class="btn btn-primary btn-lg" type="submit" value="Add Song" /></a> {% endcomment %}
+                        </div>
+                      
+                      </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+</div>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

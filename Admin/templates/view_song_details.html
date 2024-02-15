@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Song Details View </title>        
+    </head>
+    <body>
+        {% block body %}
+
+        {% if msg %}
+        <div class="alert alert-danger">
+            <strong>!!</strong> {{ msg }}
+        </div>
+        {% endif %}
+        {% comment %} <script async src="https://cse.google.com/cse.js?cx=809cf537105c3482d">
+        </script>
+        <div class="gcse-search"></div> {% endcomment %}
+        <div class="slider_area">
+            <div class="single_slider d-flex align-items-center slider_bg_1 overlay2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-xl-12">
+                    <div class="slider_text text-center">
+                      <h4 style="color: white; padding-top: 55px">View Song Details</h4>
+                    </div>
+                    <div class="card mb-3" style="border-radius: 15px; background-color: rgba(255, 255, 255, 0.8); ">
+                        <img src="{{all_songs.Song_Image.url}}" class="card-img-top" alt="Card image" >
+                        <div class="card-body">
+                          <h5 class="card-title">{{all_songs.Song_Artist}}--{{all_songs.Song_Name}}</h5>
+                          <audio controls id="audioPlayer">
+                            <source src="{{all_songs.Song_Audio_File.url}}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                          </audio>
+                            <p class="card-text lyrics">
+                                {{all_songs.Song_Lyrics_File}}
+                            </p>
+                        </div>
+                      </div>            
+                  </div>
+                </div>
+            </div>
+        </div>
+        <script async src="https://cse.google.com/cse.js?cx=761fd2998fd6f43cf">
+        </script>
+        <div class="gcse-search"></div>
+          <style>
+            .card-img-top {
+                width: 100%; /* Ensure image takes full width */
+                height: 200px; /* Adjust height as needed */
+                object-fit: cover; /* Maintain aspect ratio */
+              }
+              
+              .lyrics {
+                font-size: 16px;
+                line-height: 1.5;
+                margin-top: 1rem;
+              }
+              
+          </style>  
+          {% endblock %}
+          
+    </body>
+</html>
+
+  
